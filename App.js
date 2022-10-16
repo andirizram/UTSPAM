@@ -1,6 +1,6 @@
 import React , {useCallback, useEffect, useState} from 'react';
+import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-//import { useFonts } from 'expo-font';
 import {
   SafeAreaView,
   StyleSheet,
@@ -10,32 +10,30 @@ import {
   TextInput,
   Share,
 } from 'react-native';
- 
+
 export default function App(){
   const [inputValue, setInputValue] = useState('');
-  const [appReady, SetappReady] = useState(false);
+  const [fontsLoaded] = useFonts({
+    'ChunkFive': require('./assets/fonts/ChunkFive-Regular.otf'),
+    'CarterOne': require('./assets/fonts/Carter-One.ttf'),
+    'GrandHotel': require('./assets/fonts/GrandHotel-Regular.otf'),
+  });
 
   useEffect(() => {
-    async function prepare(){
-      try {
-        await SplashScreen.preventAutoHideAsync();
-        await new Promise(resolve => setTimeout(resolve, 2000));
-      } catch (e){
-        console.warn(e);
-      } finally {
-        SetappReady(true);
-      }
+    async function prepare() {
+      await SplashScreen.preventAutoHideAsync();
+      await new Promise(resolve => setTimeout(resolve, 4000));
     }
     prepare();
   }, []);
 
   const onLayoutRootView = useCallback(async () => {
-    if(appReady){
+    if (fontsLoaded) {
       await SplashScreen.hideAsync();
     }
-  }, [appReady]);
+  }, [fontsLoaded]);
 
-  if (!appReady){
+  if (!fontsLoaded) {
     return null;
   }
 
@@ -66,12 +64,22 @@ export default function App(){
       <SafeAreaView style={styles.container}>
         <View
           onLayout={onLayoutRootView}>
-      </View>
+        </View>
         <View style={styles.container}>
-          <Text style={styles.titleText}>
-            Link Shortener Menggunakan (TinyURL) 
+          <Text style={{fontFamily: 'CarterOne', fontSize: 45,  textAlign: 'center', borderRadius: 20, margin: 30,flexDirection: 'row',
+                        marginTop: 30,
+                        padding: 15,
+                        backgroundColor: '#a9a9a9',
+                        color:'#00ced1',
+                       }}>
+            Simplify
           </Text>
-          <Text style={styles.textStyle}>
+          <Text style={{fontFamily: 'ChunkFive', fontSize: 20,  textAlign: 'center', borderRadius: 20, marginBottom: 30,flexDirection: 'row',
+                        padding: 10,
+                        margin: 10,
+                        backgroundColor: '#00ff00',
+                        color:'#800000',
+                       }}>
             Masukkan Link Yang Ingin Di - Simplify
           </Text>
           <TextInput  
@@ -86,13 +94,15 @@ export default function App(){
             activeOpacity={0.7}
             style={styles.buttonStyle}
             onPress={getDataUsingGet}>
-            <Text style={styles.buttonTextStyle}>
+            <Text style={{fontFamily: 'GrandHotel', fontSize: 25,  textAlign: 'center', borderRadius: 20, margin: 30,flexDirection: 'row',
+                        marginTop: 10,
+                        padding: 20,
+                        backgroundColor: '#3cb371',
+                        color:'#ffd700',
+                       }}>
               Bagikan Link Yang Di - Simplify (Tekan Tombol)
             </Text>
           </TouchableOpacity>
-          <Text style={styles.textStyle}>
-          
-          </Text>
         </View>
       </SafeAreaView>
     ); 
@@ -101,17 +111,22 @@ export default function App(){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
-    padding: 10,
+    backgroundColor: '#afeeee',
+    padding:20,
     justifyContent: 'center',
     textAlign: 'center',
   },
   titleText: {
     padding: 8,
-    fontSize: 22,
+    fontSize: 26,
     textAlign: 'center',
     fontWeight: 'bold',
-    //fontFamily: 'CarterOne'
+    fontFamily: 'ChunkFive'
+  },
+  video: {
+    alignSelf: 'center',
+    width: 320,
+    height: 200,
   },
   textStyle: {
     textAlign: 'center',
@@ -126,9 +141,8 @@ const styles = StyleSheet.create({
   buttonStyle: {
     justifyContent: 'center',
     flexDirection: 'row',
-    marginTop: 30,
+    marginTop: 5,
     padding: 15,
-    backgroundColor: '#8ad24e',
   },
   buttonTextStyle: {
     color: '#fff',
@@ -136,10 +150,11 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: '#e9967a',
     borderWidth: 1,
     width: '100%',
     paddingHorizontal: 10,
+    borderRadius: 10,
   },
 });
 

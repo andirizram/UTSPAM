@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "TestReactNative1",
+    "name": "Simplify",
     "slug": "TestReactNative1",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/splashscreen.gif",
+    "icon": "./assets/screensimplify.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splashscreen.gif",
+      "image": "./assets/screensimplify.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#afeeee"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -18,16 +18,25 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.andika120140002.Simplify"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
+        "foregroundImage": "./assets/screensimplify.png",
+        "backgroundColor": "#afeeee"
+
+      },
+      "package": "com.andika120140002.Simplify"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/screensimplify.png",
+      "backgroundColor":"#afeeee"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "fc60665a-7469-4620-b0e2-66802a6644b5"
+      }
     }
   }
 }
